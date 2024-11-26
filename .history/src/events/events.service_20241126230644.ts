@@ -10,17 +10,12 @@ export class EventsService {
 
 
     async createEvent(createEventDto: CreateEventDto): Promise<Events> {
-        const { title, description, text, author, category } = createEventDto
+        const { title, description, author, category } = createEventDto
 
         const event = await this.eventModule.create({
-            title,
-            description,
-            text,
-            author,
-            category
+            createEventDto
         })
 
-
-        return event;
+        return;
     }
 }

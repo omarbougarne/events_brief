@@ -15,7 +15,7 @@ export class Events {
     description: string;
 
     @Prop({ required: true })
-    text: string;
+    main: string;
 
     @Prop({ required: true })
     author: string;

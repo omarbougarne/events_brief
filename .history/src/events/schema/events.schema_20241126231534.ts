@@ -8,20 +8,20 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
     timestamps: true,
 })
 export class Events {
-    @Prop({ required: true })
+    @Prop()
     title: string;
 
-    @Prop({ required: true })
+    @Prop()
     description: string;
 
-    @Prop({ required: true })
+    @Prop()
     text: string;
 
-    @Prop({ required: true })
+    @Prop()
     author: string;
 
-    @Prop({ required: true })
-    category: string;
+    // @Prop({ required: true })
+    // category: string;
 
 }
 

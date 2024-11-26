@@ -20,8 +20,8 @@ export class Events {
     @Prop({ required: true })
     author: string;
 
-    @Prop({ required: true })
-    category: string;
+    // @Prop({ required: true })
+    // category: string;
 
 }
 
