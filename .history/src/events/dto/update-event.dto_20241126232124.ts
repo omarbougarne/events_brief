@@ -1,7 +1,7 @@
 import { IsString } from "class-validator";
 
 
-export class UpdateEventDto {
+export class CreateEventDto {
 
 
     @IsString()

@@ -62,8 +62,5 @@ export class EventsService {
         return event;
     }
 
-    async getAllEvents(): Promise<Events[]> {
-        return await this.eventModule.find();
-    }
 
 }
