@@ -16,7 +16,7 @@ import { EventsModule } from './events/events.module';
   MongooseModule.forRoot(process.env.DB_URI),
     UsersModule,
     AuthModule,
-    EventsModule
+    // EventsModule
   ],
   controllers: [AppController],
   providers: [AppService],
