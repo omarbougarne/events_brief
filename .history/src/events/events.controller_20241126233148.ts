@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+// import { AuthGuard } from '@nestjs/passport';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -33,7 +33,6 @@ export class EventsController {
     }
 
     @Get()
-    @UseGuards(AuthGuard())
     async getAllEvents() {
         return await this.eventsService.getAllEvents();
     }
