@@ -52,18 +52,5 @@ export class EventsService {
 
         return { message: `Event with ID "${id}" has been successfully deleted.` };
     }
-    async getEventById(id: string): Promise<Events> {
-        const event = await this.eventModule.findById(id);
-
-        if (!event) {
-            throw new NotFoundException(`Event with ID "${id}" not found`);
-        }
-
-        return event;
-    }
-
-    async getAllEvents(): Promise<Events[]> {
-        return await this.eventModule.find();
-    }
 
 }

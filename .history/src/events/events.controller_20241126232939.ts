@@ -27,13 +27,5 @@ export class EventsController {
         return await this.eventsService.deleteEvent(id);
     }
 
-    @Get(':id')
-    async getEventById(@Param('id') id: string) {
-        return await this.eventsService.getEventById(id);
-    }
 
-    @Get()
-    async getAllEvents() {
-        return await this.eventsService.getAllEvents();
-    }
 }
