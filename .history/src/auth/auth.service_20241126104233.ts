@@ -5,7 +5,6 @@ import { Model } from 'mongoose';
 import { User } from 'src/users/schema/user.schema';
 import { SignUpDto } from './dto/signup.dto';
 import * as bcrypt from 'bcryptjs';
-import { LoginInDto } from './dto/login.dto';
 @Injectable()
 export class AuthService {
     constructor(
@@ -35,17 +34,14 @@ export class AuthService {
         const { email, password } = loginInDto;
 
 
+        const hashedPassword = await bcrypt.hash(password, 10)
 
+        const user = await this.userModel.create({
+            name,
+            email,
+            password: hashedPassword
+        })
 
-        const user = await this.userModel.findOne({ email })
-        if (!user) {
-            console.log("user doest exist")  //ToDo nest errors
-        }
-        const compare = await bcrypt.compare(password, user.password)
-
-        if (compare !== password) {
-            console.log("user doest exist pass")  //ToDo nest errors
-        }
         const token = this.jwtService.sign({ id: user._id });
 
         return { user, token }

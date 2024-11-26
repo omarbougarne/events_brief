@@ -42,10 +42,6 @@ export class AuthService {
             console.log("user doest exist")  //ToDo nest errors
         }
         const compare = await bcrypt.compare(password, user.password)
-
-        if (compare !== password) {
-            console.log("user doest exist pass")  //ToDo nest errors
-        }
         const token = this.jwtService.sign({ id: user._id });
 
         return { user, token }
