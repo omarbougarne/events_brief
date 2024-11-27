@@ -24,7 +24,7 @@ export class Events {
     @Prop({ required: true })
     category: string;
 
-    @Prop({ type: [{ type: Types.ObjectId, ref: "User" }], required: false })
+    @Prop({ type: Types.ObjectId, ref: "User", required: false })
     subscribers: []
 
 }

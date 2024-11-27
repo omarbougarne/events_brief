@@ -32,15 +32,21 @@ export class EventsService {
     }
 
 
-    async populateEvent(id: string): Promise<Events> {
+    async updateEvent(id: string, updateEventDto: UpdateEventDto): Promise<Events> {
 
-        const populateEvent = (await this.eventModule.findById(id)).populate('subscribers')
 
-        if (!populateEvent) {
+        const event = await this.eventModule.findByIdAndUpdate(
+            id,
+            updateEventDto,
+
+            { new: true }
+
+        )
+        if (!event) {
             throw new NotFoundException(`Event with ID "${id}" not found`);
         }
 
-        return populateEvent;
+        return event;
     }
 
 
