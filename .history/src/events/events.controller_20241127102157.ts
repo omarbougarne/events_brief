@@ -13,13 +13,7 @@ export class EventsController {
     constructor(private eventsService: EventsService) { }
 
 
-    @Get()
-    @UseGuards(AuthGuard())
-    async getAllEvents() {
-        return await this.eventsService.getAllEvents();
-    }
-
-    @Post()
+    @Post('create')
     @Roles(Role.Organizer)
     @UseGuards(AuthGuard(), RolesGuard)
     createEvents(@Body() createEventDto: CreateEventDto) {
@@ -29,30 +23,35 @@ export class EventsController {
 
     @Patch(':id')
     @Roles(Role.Organizer)
-    // @UseGuards(AuthGuard(), RolesGuard)      
+    @UseGuards(AuthGuard(), RolesGuard)
     async updateEvent(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
         return await this.eventsService.updateEvent(id, updateEventDto);
     }
 
-    // @Patch('/fill/:id')
-    // @Roles(Role.Organizer)
-    // @UseGuards(AuthGuard(), RolesGuard)
-    // async populateEvents(@Param('id') id: string) {
-    //     return await this.eventsService.populateEvent(id);
-    // }
+    @Patch(':id')
+    @Roles(Role.Organizer)
+    @UseGuards(AuthGuard(), RolesGuard)
+    async populateEvents(@Param('id') id: string) {
+        return await this.eventsService.populateEvent(id);
+    }
 
 
     @Delete(':id')
     @Roles(Role.Organizer)
-    // @UseGuards(AuthGuard(), RolesGuard)
+    @UseGuards(AuthGuard(), RolesGuard)
     async deleteEvent(@Param('id') id: string) {
         return await this.eventsService.deleteEvent(id);
     }
 
-    // @Get(':id')
-    // @UseGuards(AuthGuard())
-    // async getEventById(@Param('id') id: string) {
-    //     return await this.eventsService.getEventById(id);
-    // }
+    @Get(':id')
+    @UseGuards(AuthGuard())
+    async getEventById(@Param('id') id: string) {
+        return await this.eventsService.getEventById(id);
+    }
 
+    @Get()
+    @UseGuards(AuthGuard())
+    async getAllEvents() {
+        return await this.eventsService.getAllEvents();
+    }
 }

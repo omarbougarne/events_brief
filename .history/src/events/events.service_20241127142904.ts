@@ -28,7 +28,7 @@ export class EventsService {
             console.error('Error creating event:');
             throw new BadRequestException('Failed to create event');
         }
-        return event.save();
+        return event;
     }
 
 
