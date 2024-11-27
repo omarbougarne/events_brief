@@ -34,7 +34,7 @@ export class EventsService {
 
     async updateEvent(id: string, updateEventDto: UpdateEventDto): Promise<Events> {
 
-
+        const user = this.userModule.find();
         const event = await this.eventModule.findByIdAndUpdate(
             id,
             updateEventDto,

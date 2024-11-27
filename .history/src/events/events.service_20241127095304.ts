@@ -8,9 +8,8 @@ import { User } from 'src/users/schema/user.schema';
 
 @Injectable()
 export class EventsService {
-    constructor(
-        @InjectModel(Events.name) private eventModule: Model<Events>,
-        @InjectModel(User.name) private userModule: Model<User>
+    constructor(@InjectModel(Events.name) private eventModule: Model<Events>
+    @InjectModel(User.name) private userModule: Model<User>
     ) { }
 
 
@@ -34,11 +33,11 @@ export class EventsService {
 
     async updateEvent(id: string, updateEventDto: UpdateEventDto): Promise<Events> {
 
-
+        const user = 
         const event = await this.eventModule.findByIdAndUpdate(
             id,
             updateEventDto,
-
+            subscribers: []
             { new: true }
 
         )
