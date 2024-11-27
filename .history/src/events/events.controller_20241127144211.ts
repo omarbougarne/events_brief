@@ -29,7 +29,7 @@ export class EventsController {
 
     @Patch(':id')
     @Roles(Role.Organizer)
-    // @UseGuards(AuthGuard(), RolesGuard)      
+    @UseGuards(AuthGuard(), RolesGuard)
     async updateEvent(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
         return await this.eventsService.updateEvent(id, updateEventDto);
     }
@@ -44,7 +44,7 @@ export class EventsController {
 
     @Delete(':id')
     @Roles(Role.Organizer)
-    // @UseGuards(AuthGuard(), RolesGuard)
+    @UseGuards(AuthGuard(), RolesGuard)
     async deleteEvent(@Param('id') id: string) {
         return await this.eventsService.deleteEvent(id);
     }

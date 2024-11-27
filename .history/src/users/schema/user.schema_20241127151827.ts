@@ -22,9 +22,10 @@ export class User extends Document {
     @Prop({ unique: true, required: true })
     password: string;
 
-    @Prop({ required: true, enum: Role })
+    @Prop({
+        enum: Role
+    })
     role: Role;
-
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

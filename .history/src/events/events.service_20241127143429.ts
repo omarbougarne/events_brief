@@ -16,7 +16,7 @@ export class EventsService {
     async createEvent(createEventDto: CreateEventDto): Promise<Events> {
         const { title, description, text, author, category } = createEventDto
 
-        const event = await this.eventModule.create({
+        const event = await new this.eventModule({
             title,
             description,
             text,
@@ -28,7 +28,7 @@ export class EventsService {
             console.error('Error creating event:');
             throw new BadRequestException('Failed to create event');
         }
-        return event.save();
+        return event;
     }
 
 

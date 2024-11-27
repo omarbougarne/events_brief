@@ -3,7 +3,14 @@ import { EventsService } from './events.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Events } from './schema/events.schema';
+
+
+import { Test, TestingModule } from '@nestjs/testing';
+import { EventsService } from './events.service';
+import { getModelToken } from '@nestjs/mongoose';
 import { NotFoundException } from '@nestjs/common';
+import { Model } from 'mongoose';
+import { Events } from './schema/events.schema';
 
 describe('EventsService', () => {
   let eventsService: EventsService;
@@ -78,7 +85,30 @@ describe('EventsService', () => {
     });
   });
 
+  describe('updateEvent', () => {
+    it('should update an event', async () => {
+      const updatedEvent = { ...mockEvent, title: 'Updated Title' };
+      jest.spyOn(model, 'findByIdAndUpdate').mockResolvedValue(updatedEvent as any);
 
+      // const result = await eventsService.updateEvent(mockEvent._id, {
+      //   title: 'Updated Title',
+      // });
+      expect(model.findByIdAndUpdate).toHaveBeenCalledWith(
+        mockEvent._id,
+        { title: 'Updated Title' },
+        { new: true },
+      );
+      expect(result).toEqual(updatedEvent);
+    });
+
+    it('should throw NotFoundException if event not found', async () => {
+      jest.spyOn(model, 'findByIdAndUpdate').mockResolvedValue(null);
+
+      await expect(
+        eventsService.updateEvent('nonexistentId', { title: 'Updated Title' }),
+      ).rejects.toThrow(NotFoundException);
+    });
+  });
 
   describe('deleteEvent', () => {
     it('should delete an event', async () => {

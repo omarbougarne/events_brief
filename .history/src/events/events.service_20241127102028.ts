@@ -1,15 +1,16 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Events, EventsDocument } from './schema/events.schema';
+import { Events } from './schema/events.schema';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
-
+import { User } from 'src/users/schema/user.schema';
 
 @Injectable()
 export class EventsService {
     constructor(
-        @InjectModel(Events.name) private eventModule: Model<EventsDocument>
+        @InjectModel(Events.name) private eventModule: Model<Events>,
+        @InjectModel(User.name) private userModule: Model<User>
     ) { }
 
 
@@ -25,16 +26,15 @@ export class EventsService {
         })
 
         if (!event) {
-            console.error('Error creating event:');
-            throw new BadRequestException('Failed to create event');
+            console.log("Empty body")
         }
-        return event.save();
+        return event;
     }
 
 
     async populateEvent(id: string): Promise<Events> {
 
-        const populateEvent = await this.eventModule.findById(id).populate('subscribers').exec()
+        const populateEvent = (await this.eventModule.findById(id)).populate('subscribers')
 
         if (!populateEvent) {
             throw new NotFoundException(`Event with ID "${id}" not found`);
@@ -42,22 +42,7 @@ export class EventsService {
 
         return populateEvent;
     }
-    async updateEvent(id: string, updateEventDto: UpdateEventDto): Promise<Events> {
 
-
-        const event = await this.eventModule.findByIdAndUpdate(
-            id,
-            updateEventDto,
-
-            { new: true }
-
-        )
-        if (!event) {
-            throw new NotFoundException(`Event with ID "${id}" not found`);
-        }
-
-        return event;
-    }
 
 
 

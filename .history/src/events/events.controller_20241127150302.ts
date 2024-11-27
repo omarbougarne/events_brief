@@ -5,7 +5,7 @@ import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { Role } from 'src/auth/enums/role.enum';
 import { Roles } from 'src/auth/decorators/role.decorator';
-import { RolesGuard } from 'src/auth/guards/role.guards';
+// import { RolesGuard } from 'src/auth/guards/role.guards';
 
 
 @Controller('events')
@@ -21,7 +21,7 @@ export class EventsController {
 
     @Post()
     @Roles(Role.Organizer)
-    @UseGuards(AuthGuard(), RolesGuard)
+    // @UseGuards(AuthGuard(), RolesGuard)
     createEvents(@Body() createEventDto: CreateEventDto) {
         return this.eventsService.createEvent(createEventDto)
     }

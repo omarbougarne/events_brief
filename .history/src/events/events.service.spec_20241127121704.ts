@@ -3,7 +3,14 @@ import { EventsService } from './events.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Events } from './schema/events.schema';
+
+
+import { Test, TestingModule } from '@nestjs/testing';
+import { EventsService } from './events.service';
+import { getModelToken } from '@nestjs/mongoose';
 import { NotFoundException } from '@nestjs/common';
+import { Model } from 'mongoose';
+import { Events } from './schema/events.schema';
 
 describe('EventsService', () => {
   let eventsService: EventsService;
